@@ -30,5 +30,12 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Comments> commentsList = new ArrayList<>();
 
+    public static Member createMember(String loginId, String password, String name) {
+        Member member = new Member();
+        member.setLoginId(loginId);
+        member.setPassword(password);
+        member.setName(name);
+        return member;
+    }
 
 }

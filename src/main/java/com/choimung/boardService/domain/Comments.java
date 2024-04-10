@@ -22,6 +22,10 @@ public class Comments {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "POSTS_ID")
+    private Posts posts;
+
     private String content;
     private String createBy;
     private LocalDateTime createAt;
