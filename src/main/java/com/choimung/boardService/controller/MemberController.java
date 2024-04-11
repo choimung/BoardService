@@ -1,5 +1,6 @@
 package com.choimung.boardService.controller;
 
+import com.choimung.boardService.controller.dto.MemberJoinForm;
 import com.choimung.boardService.domain.Member;
 import com.choimung.boardService.service.MemberService;
 import lombok.RequiredArgsConstructor;
