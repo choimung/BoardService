@@ -10,7 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -34,9 +36,9 @@ public class Posts {
 
     private String title;
     private String content;
-    @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private String createBy;
-    private LocalDateTime createAt;
+    @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private LocalDate createAt;
     private LocalDateTime modifiedAt;
     private String modifiedBy;
 
@@ -45,7 +47,7 @@ public class Posts {
         posts.setMember(member);
         posts.setTitle(title);
         posts.setContent(content);
-        posts.setCreateAt(LocalDateTime.now());
+        posts.setCreateAt(LocalDate.now());
         posts.setCreateBy(member.getName());
         return posts;
     }

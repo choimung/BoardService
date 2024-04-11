@@ -9,32 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static" th:href="@{/css/style.css}">
-    <!-- 폰트 어썸 적용 -->
     <script src="https://kit.fontawesome.com/e818618146.js" crossorigin="anonymous"></script>
     <title>게시판</title>
 </head>
 <body>
-   
-   <header>
-<!--       <div class="login">-->
-<!--           <div class="login_user">-->
-<!--&lt;!&ndash;               <img class="profile_img" th:if="${loginMember != null and loginMember.image != null}" th:src="|/user/profile/${loginMember.image}|" alt="">&ndash;&gt;-->
-<!--&lt;!&ndash;              <p class ="rank" th:if="${loginMember != null}" th:text="${loginMember.getGrade()}"> Admin </p>&ndash;&gt;-->
-<!--               <a th:text="${loginMember != null ? loginMember.name() : '비회원'}" th:href="@{/user/edit}">-->
-<!--                   비회원-->
-<!--               </a>-->
 
-<!--               <div class="login_form">-->
-<!--                <a href="#" th:href="@{/user/logout}" th:if="${loginMember != null}" class="login_btn"> 로그아웃 </a>-->
-<!--                <a href="#" th:if="${loginMember == null}" th:href="@{/user/login}" class="login_btn"> 로그인 </a>-->
-<!--                <a href="#" th:href="@{/user/signup}" class="login_btn"> 회원가입 </a>-->
-<!--               </div>-->
-<!--           </div>-->
-
-<!--       </div>-->
-       
-   </header>
-   
    <nav>
        <div class="nav">
            <div class="search">
@@ -58,25 +37,18 @@
                     <th class="post_subject">제목</th>
                     <th class="post_author">글쓴이</th>
                     <th class="post_date">날짜</th>
-                    <th class="post_views">조회</th>
+<!--                    <th class="post_views">조회</th>-->
                 </tr>
             </thead>
             <tbody class="posts">
                 <tr th:each="post : ${posts}">
-                    <td class="post_id" th:text="${post.id}" >1</td>
+                    <td class="post_id" th:text="${post.id}">1</td>
                     <td class="post_title">
-<!--                   <div class="post_img">-->
-<!--                       <img class="post_image" th:if="${post.image != null}" th:src="@{/posts/image/{imagename}(imagename=${post.image})}" alt="">-->
-
-<!--&lt;!&ndash;                       <img class="post_image" src="h.png" th:src="@{/posts/image/{imagename}(imagename = ${post.image.getStoreFileName()})}" alt="">&ndash;&gt;-->
-<!--                   </div>-->
-                    <a class="post_title_title" href="#" th:href="@{/posts/{postId}(postId = ${post.id})}" th:text="${post.title}">이것은 첫 번째 게시글의 내용입니다.</a>
+                        <p><a class="post_title_title" href="#" th:href="@{/posts/{postId}(postId = ${post.id})}" th:text="${post.title}">1</a></p>
                     </td>
                     <td class="post_author" th:text="${post.createBy}">John Doe</td>
                     <td class="modify_date" th:text="${post.createAt}">2024-02-09</td>
-<!--                    <td class="page_views" th:text="${post.views}">0</td>-->
                 </tr>
-                
             </tbody>
         </table>
     </div>
