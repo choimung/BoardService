@@ -20,6 +20,10 @@ public class PostsService {
         postsRepository.save(posts);
     }
 
+    public Posts findOne(Long postId) {
+        return postsRepository.findOne(postId);
+    }
+
     public List<Posts> findAll() {
         return postsRepository.findAll();
     }
