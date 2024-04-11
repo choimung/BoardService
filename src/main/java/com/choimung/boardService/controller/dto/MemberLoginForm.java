@@ -1,4 +1,4 @@
-package com.choimung.boardService.controller;
+package com.choimung.boardService.controller.dto;
 
 import lombok.Getter;
 import lombok.Setter;
