@@ -15,6 +15,7 @@ public class PostsService {
 
     private final PostsRepository postsRepository;
 
+
     public void save(Posts posts) {
         postsRepository.save(posts);
     }

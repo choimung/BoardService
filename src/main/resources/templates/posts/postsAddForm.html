@@ -208,31 +208,31 @@ header .login .signup{
 <body>
    <header>
 
-       <div class="login">
-           <div class="login_user">
-               <img class="profile_img" th:if="${loginMember != null and loginMember.image != null}" th:src="|/user/profile/${loginMember.image}|" alt="">
-               <p class ="rank" th:if="${loginMember != null}" th:text="${loginMember.getGrade()}"> Admin </p>
-               <a th:text="${loginMember != null ? loginMember.getNickname() : '비회원'}" th:href="@{/user/{loginId}/edit(loginId=${loginMember?.loginId})}">
-                   비회원
-               </a>
+<!--       <div class="login">-->
+<!--           <div class="login_user">-->
+<!--               <img class="profile_img" th:if="${loginMember != null and loginMember.image != null}" th:src="|/user/profile/${loginMember.image}|" alt="">-->
+<!--               <p class ="rank" th:if="${loginMember != null}" th:text="${loginMember.getGrade()}"> Admin </p>-->
+<!--               <a th:text="${loginMember != null ? loginMember.getNickname() : '비회원'}" th:href="@{/user/{loginId}/edit(loginId=${loginMember?.loginId})}">-->
+<!--                   비회원-->
+<!--               </a>-->
 
-               <div class="login_form">
-                   <a href="#" th:href="@{/user/logout}" th:if="${loginMember != null}" class="login_btn"> 로그아웃 </a>
-                   <a href="#" th:if="${loginMember == null}" th:href="@{/user/login}" class="login_btn"> 로그인 </a>
-                   <a href="#" th:href="@{/user/signup}" class="login_btn"> 회원가입 </a>
-               </div>
-           </div>
-       </div>
+<!--               <div class="login_form">-->
+<!--                   <a href="#" th:href="@{/user/logout}" th:if="${loginMember != null}" class="login_btn"> 로그아웃 </a>-->
+<!--                   <a href="#" th:if="${loginMember == null}" th:href="@{/user/login}" class="login_btn"> 로그인 </a>-->
+<!--                   <a href="#" th:href="@{/user/signup}" class="login_btn"> 회원가입 </a>-->
+<!--               </div>-->
+<!--           </div>-->
+<!--       </div>-->
        
    </header>
     <div class="container">
-        <form th:action method="post" th:object="${postAddDto}" enctype="multipart/form-data">
+        <form th:action method="post" th:object="${form}" enctype="multipart/form-data">
             
             <label for="postTitle">제목</label>
             <input type="text" id="postTitle" name="postTitle" th:field="*{title}" placeholder="제목을 입력해주세요.">
 
-            <label for="image">이미지</label>
-            <input type="file" class="form-control-file" id="image" th:field="*{image}" accept="image/*">
+<!--            <label for="image">이미지</label>-->
+<!--            <input type="file" class="form-control-file" id="image" th:field="*{image}" accept="image/*">-->
             
             <label for="postContent">내용</label>
             <textarea id="postContent" name="postContent"  th:field="*{content}"placeholder="콘텐츠 내용을 입력해주세요."></textarea>

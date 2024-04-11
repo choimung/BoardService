@@ -18,6 +18,10 @@ public class MemberService {
         return member.getId();
     }
 
+    public Member findOne(Long memberId) {
+        return memberRepository.findOne(memberId);
+    }
+
     public Member login(String loginId, String password) {
         return memberRepository.findByLoginId(loginId).stream()
                 .filter(m -> m.getPassword().equals(password)).findFirst()

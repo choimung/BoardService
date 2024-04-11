@@ -1,5 +1,7 @@
 package com.choimung.boardService.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +16,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.annotation.Primary;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Getter @Setter
@@ -31,6 +34,7 @@ public class Posts {
 
     private String title;
     private String content;
+    @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private String createBy;
     private LocalDateTime createAt;
     private LocalDateTime modifiedAt;
