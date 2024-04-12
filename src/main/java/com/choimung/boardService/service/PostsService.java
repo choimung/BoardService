@@ -2,6 +2,7 @@ package com.choimung.boardService.service;
 
 import com.choimung.boardService.domain.Posts;
 import com.choimung.boardService.respository.PostsRepository;
+import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

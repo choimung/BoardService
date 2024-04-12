@@ -22,6 +22,6 @@ public class PostsRepository {
     }
 
     public List<Posts> findAll() {
-        return em.createQuery("SELECT p FROM Posts p ", Posts.class).getResultList();
+        return em.createQuery("SELECT p FROM Posts p order by p.id desc", Posts.class).getResultList();
     }
 }
