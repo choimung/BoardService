@@ -51,11 +51,12 @@ public class PostsController {
     }
 
     @GetMapping("/{postId}")
-    public String post(@PathVariable Long postId, Model model) {
+    public String post(@SessionAttribute(name = "loginMember",required = false) Member member, @PathVariable Long postId, Model model) {
         Posts findPost = postsService.findOne(postId);
         List<Comments> commentsList = commentsRepository.findByPostId(postId);
         model.addAttribute("comments", commentsList);
         model.addAttribute("post", findPost);
+        model.addAttribute("loginMember", member);
         return "posts/post";
     }
 

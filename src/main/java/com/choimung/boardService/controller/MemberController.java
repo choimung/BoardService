@@ -3,6 +3,8 @@ package com.choimung.boardService.controller;
 import com.choimung.boardService.controller.dto.MemberJoinForm;
 import com.choimung.boardService.domain.Member;
 import com.choimung.boardService.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,17 @@ public class MemberController {
     public String memberJoin(@ModelAttribute MemberJoinForm form) {
         Member member = Member.createMember(form.getLoginId(), form.getPassword(), form.getName());
         memberService.join(member);
+        return "redirect:/";
+    }
+
+    @PostMapping("/logout")
+    public String logOut(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        if(session != null) {
+            session.invalidate();
+        }
+
         return "redirect:/";
     }
 

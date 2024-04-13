@@ -14,6 +14,7 @@
             background-color: silver;
             color: #fff;
         }
+
         .title {
             font-size: 20px;
         }
@@ -21,39 +22,75 @@
     </style>
 </head>
 <body>
-<div class="window" style="margin: 32px; width: 250px; overflow: hidden; word-break: break-word">
-    <div class="title-bar">
-        <div class="title-bar-text">
-            MyFirst Project
+
+<div class="title" style="height: 100px; position:relative;">
+    <div class="window"
+         style="margin: 32px; width: 150px; overflow: hidden; word-break: break-word; position: absolute; right: 230px">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                User Info
+            </div>
+            <div class="title-bar-controls">
+                <button aria-label="Maximize"></button>
+                <form action="/user/logout" method="post">
+                    <button aria-label="Close"></button>
+                </form>
+            </div>
+        </div>
+        <div class="window-body" style="color: black; margin-left:23px;">
+            <a style="text-decoration:none;" th:text="${loginMember != null ? loginMember.getName() : '비회원'}"
+               th:href="@{/user/{loginId}/edit(loginId=${loginMember?.loginId})}">비회원</a> 님 반갑습니다.
         </div>
     </div>
-    <div class="window-body">
-        <p>Hello, world</p>
-    </div>
+
 </div>
 
 
+<!--
+<div class="" style="max-width: 1200px; margin: 20px auto; position: relative;">
+    <menu role="tablist" style="">
+        <li role="tab" aria-selected="true"><a href="#tabs">Desktop</a></li>
+        <li role="tab"><a href="#tabs">My computer</a></li>
+        <li role="tab"><a href="#tabs">Control panel</a></li>
+        <li role="tab"><a href="#tabs">Devices manager</a></li>
+        <li role="tab"><a href="#tabs">Hardware profiles</a></li>
+        <li role="tab"><a href="#tabs">Performance</a></li>
+    </menu>
+    <div class="window" role="tabpanel">
+        <div class="window-body">
+            <p>the tab content</p>
+        </div>
+    </div>
+</div>
+-->
 
 <div class="window" style="max-width: 1200px; margin: 20px auto; position: relative;">
     <div class="title-bar">
         <div class="title-bar-text">
-            <div class="title-bar-text" style="font-size: 20px; margin-left: 5px;" th:text="${post.title}" >TITLE</div>
+            <div class="title-bar-text" style="font-size: 20px; margin-left: 5px;" th:text="${post.title}">TITLE</div>
         </div>
     </div>
 
     <div class="author" style="display: flex; font-size: 11px; color: black; margin-left: 5px; margin-top: -5px">
-        <p style="margin-right: 5px">작성자 : </p> <p style="color: black; margin-right: 20px" th:text="${post.createBy}">최민우</p>
-        <p style="margin-right: 5px">작성일 : </p> <p style="color: black; margin-top: 13px"th:text="${post.createAt}">2024-04-11</p>
+        <p style="margin-right: 5px">작성자 : </p>
+        <p style="color: black; margin-right: 20px" th:text="${post.createBy}">최민우</p>
+        <p style="margin-right: 5px">작성일 : </p>
+        <p style="color: black; margin-top: 13px" th:text="${post.createAt}">2024-04-11</p>
     </div>
     <hr style="margin-top: -5px">
-    <div class="content" style="position: relative;">
-        <p style="font-size: 15px; margin-left: 10px; color: black; font-size: 11px" th:text="${post.content}">Hello World 입니다.</p>
+    <div class="content" style="position: relative; height: 300px;">
+        <p style="font-size: 15px; margin-left: 10px; color: black; font-size: 11px" th:text="${post.content}">Hello
+            World 입니다.</p>
     </div>
 
-    <div class="post-button" style="position: absolute; right:0; margin-top: 5px;">
-        <button type="button" th:onclick= "|location.href='@{/posts/{postId}/edit(postId = ${post.id})}'|" >수정</button>
-        <button type="button" th:onclick= "|location.href='@{/posts/{postId}/delete(postId = ${post.id})}'|">삭제</button>
-        <button type="button" th:onclick= "|location.href='@{/posts}'|">메인</button>
+    <div class="post-button" style="position: absolute; right:0; margin-top: 10px;">
+        <button type="button" th:onclick="|location.href='@{/posts/{postId}/edit(postId = ${post.id})}'|"
+                style="margin-right: 5px">수정
+        </button>
+        <button type="button" th:onclick="|location.href='@{/posts/{postId}/delete(postId = ${post.id})}'|"
+                style="margin-right: 5px">삭제
+        </button>
+        <button type="button" th:onclick="|location.href='@{/posts}'|">메인</button>
     </div>
 </div>
 
@@ -63,24 +100,29 @@
 
     <hr>
 
-    <div class="window" style="max-width: 1195px; margin: 20px auto; position: relative;" th:each="comment : ${comments}">
+    <div class="window" style="max-width: 1195px; margin: 20px auto; position: relative;"
+         th:each="comment : ${comments}">
 
-        <div class="author" style="display: flex; font-size: 11px; color: black; margin-left: 5px; margin-top: -6px; height: 30px;">
+        <div class="author"
+             style="display: flex; font-size: 11px; color: black; margin-left: 5px; margin-top: -6px; height: 30px;">
             <div class="comment" style="display: flex">
-                <p style="color: black; margin-right: 4px" th:text="${comment.createBy}" >최민우</p>
+                <p style="color: black; margin-right: 4px" th:text="${comment.createBy}">최민우</p>
                 <p style="margin-right: 5px">:</p>
                 <p style="margin-top: 11px; " th:text="${comment.content}">댓글 내용</p>
-                <p style="color: black; margin-top: 13px; position: absolute; right:20px; font-size: 11px" th:text="${comment.createAt}">2024-04-11</p>
+                <p style="color: black; margin-top: 13px; position: absolute; right:20px; font-size: 11px"
+                   th:text="${comment.createAt}">2024-04-11</p>
             </div>
 
         </div>
 
     </div>
-    <div class="comment" style="max-width: 1200px; margin: 20px auto; position: relative;">
-        <form id="comment-form" th:action method="post">
-            <textarea id="comment" name="comment" rows="8" required style="width:1200px"></textarea>
-            <button type="submit" style="position: absolute; bottom: -24px; right: 0px">작성</button>
-        </form>
+    <div style="margin-bottom: 100px">
+        <div class="comment" style="max-width: 1200px; margin: 20px auto; position: relative;">
+            <form id="comment-form" th:action method="post">
+                <textarea id="comment" name="comment" rows="8" required style="width:1200px"></textarea>
+                <button type="submit" style="position: absolute; bottom: -24px; right: 0px;">작성</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>
