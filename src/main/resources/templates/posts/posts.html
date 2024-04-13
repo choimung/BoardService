@@ -2,74 +2,114 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static" th:href="@{/css/style.css}">
-    <script src="https://kit.fontawesome.com/e818618146.js" crossorigin="anonymous"></script>
-    <title>게시판</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>New Post</title>
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: silver;
+            color: #fff;
+        }
+
+        .title {
+            font-size: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover{
+            text-decoration: underline;
+        }
+        .post_list :hover{
+            background-color: #eaeaea;
+        }
+
+    </style>
 </head>
 <body>
 
-   <nav>
-       <div class="nav">
-           <div class="search">
-               <form action="/posts" method="get">
-                   <i class="fa-solid fa-magnifying-glass"></i>
-                   <input type="text" name="search" placeholder="포스트 제목">
-                   <button type="submit">검색</button>
-               </form>
-           </div>
-       </div>
-   </nav>
-   
-   <main>
-       
-   </main>
-    <div class="container">
-        <table>
-            <thead>
-                <tr class="post_title">
-                    <th class="post_id">번호</th>
-                    <th class="post_subject">제목</th>
-                    <th class="post_author">글쓴이</th>
-                    <th class="post_date">날짜</th>
-<!--                    <th class="post_views">조회</th>-->
-                </tr>
-            </thead>
-            <tbody class="posts">
-                <tr th:each="post : ${posts}">
-                    <td class="post_id" th:text="${post.id}">1</td>
-                    <td class="post_title">
-                        <p><a class="post_title_title" href="#" th:href="@{/posts/{postId}(postId = ${post.id})}" th:text="${post.title}">1</a></p>
-                    </td>
-                    <td class="post_author" th:text="${post.createBy}">John Doe</td>
-                    <td class="modify_date" th:text="${post.createAt}">2024-02-09</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="title" style="height: 100px; position:relative;">
+    <div class="window"
+         style="margin: 32px; width: 150px; overflow: hidden; word-break: break-word; position: absolute; right: 230px">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                User Info
+            </div>
+            <div class="title-bar-controls">
+                <button aria-label="Maximize"></button>
+                <form action="/user/logout" method="post">
+                    <button aria-label="Close"></button>
+                </form>
+            </div>
+        </div>
+        <div class="window-body" style="color: black; margin-left:23px;">
+            <a style="text-decoration:none;" th:text="${loginMember != null ? loginMember.getName() : '비회원'}"
+               th:href="@{/user/{loginId}/edit(loginId=${loginMember?.loginId})}">비회원</a> 님 반갑습니다.
+        </div>
     </div>
-    
-    <div class="menu_box">
-      
-       <div class="post_menu">
-           <button style="cursor: pointer" th:onclick="|if (${loginMember == null}) { alert('로그인 후 사용하세요.'); } else { location.href='@{/posts/add}'; }|">글작성</button>
-       </div>
-       
-<!--        <div class="page_btn">-->
-<!--          -->
-<!--           <a href="#">-->
-<!--                <i class="fa-solid fa-chevron-left"></i>-->
-<!--           </a>-->
-<!--           -->
-<!--           <a href="#">-->
-<!--                <i class="fa-solid fa-chevron-right"></i>-->
-<!--           </a>-->
-<!--        </div>-->
 
+</div>
+
+
+<div class="" style="max-width: 1200px; margin: 0px auto; position: relative;">
+    <menu role="tablist" style="">
+        <li role="tab" aria-selected="true"><a href="#tabs">Desktop</a></li>
+        <li role="tab"><a href="#tabs">My computer</a></li>
+        <li role="tab"><a href="#tabs">Control panel</a></li>
+        <li role="tab"><a href="#tabs">Devices manager</a></li>
+        <li role="tab"><a href="#tabs">Hardware profiles</a></li>
+        <li role="tab"><a href="#tabs">Performance</a></li>
+    </menu>
+    <div class="window" role="tabpanel">
+        <div class="window-body" style="overflow: hidden;">
+            <div class="sunken-panel" style="max-height: 600px; width: 1200px; margin: 0 auto;">
+                <table class="interactive">
+                    <thead>
+                    <tr style="color: black; font-size: 13px">
+                        <th style="width: 200px; height: 30px; text-align: center">id</th>
+                        <th style="width: 650px; height: 30px; text-align: center">title</th>
+                        <th style="width: 100px; height: 30px; text-align: center">author</th>
+                        <th style="width: 180px; height: 30px; text-align: center">date</th>
+                        <th style="width: 46px; height: 30px; text-align: center">views</th>
+                    </tr>
+                    </thead>
+                    <tbody class="post_list">
+                    <tr style="color: black; text-align: center;" th:each="post : ${posts}"
+                        th:href="@{/posts/{postId}(postId = ${post.id})}">
+                        <td style="height: 30px; border-bottom:1px solid #bebebe;"><a
+                                th:href="@{/posts/{postId}(postId = ${post.id})}" th:text="${post.id}">1</a></td>
+                        <td style="height: 30px; border-bottom:1px solid #bebebe;"><a
+                                th:href="@{/posts/{postId}(postId = ${post.id})}" th:text="${post.title}">3.51.11.00</a>
+                        </td>
+                        <td style="height: 30px; border-bottom:1px solid #bebebe;"><a
+                                th:href="@{/posts/{postId}(postId = ${post.id})}" th:text="${post.createBy}">MySQL
+                            AB</a></td>
+                        <td style="height: 30px; border-bottom:1px solid #bebebe;" th:text="${post.createAt}">1</td>
+                        <td style="height: 30px; border-bottom:1px solid #bebebe;">1</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <script>
+                document.querySelectorAll('table.interactive').forEach(element => {
+                    element.addEventListener('click', (event) => {
+                        const row = event.path.find(element => element.tagName === 'TR' && element.parentElement.tagName === 'TBODY');
+                        if (row) {
+                            row.classList.toggle('highlighted');
+                        }
+                    })
+                });
+            </script>
+        </div>
     </div>
+</div>
+
 </body>
 </html>
