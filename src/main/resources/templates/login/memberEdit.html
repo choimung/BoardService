@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap"
           rel="stylesheet">
-
-    <title>회원수정</title>
+    <script src="https://kit.fontawesome.com/e818618146.js" crossorigin="anonymous"></script>
+    <title>Login</title>
     <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
     <!-- Custom CSS -->
     <style>
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #ffffffff;
-            color: #000000;
+            font-family: 'Roboto', sans-serif;
+            background-color: silver;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -25,16 +26,15 @@
             margin: 0;
         }
 
-        .signup-container {
+        .login-container {
             width: 300px;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
         }
 
-        .signup-form {
+        .login-form {
             margin-top: 20px;
         }
 
@@ -60,40 +60,89 @@
             border-color: #545b62;
         }
 
-        .field-error {
-            border-color: darkred;
-            color: darkred;
+        .sns {
+            margin-left: 45px;
+            display: flex;
+            text-align: center;
+            margin-top: 8px;
         }
-        /* 추가된 스타일 */
-        .profile-image-input {
-            display: none;
+
+        .sns a {
+            margin-top: 10px;
+            margin-right: 20px;;
+        }
+
+        .field-error {
+            color: darkred;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<div class="signup-container">
-    <h2 class="text-center">회원수정</h2>
-    <form class="signup-form" th:action th:object="${member}" method="post" enctype="multipart/form-data">
+
+
+<div class="window" style="width: 250px; height: 240px;">
+    <div class="title-bar">
+        <div class="title-bar-text">Member</div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="window-body" style="color: black;">
+        <form class="signup-form" th:action th:object="${member}" method="post" enctype="multipart/form-data">
+            <div class="field-row-stacked" style="width: 230px">
+                <label for="text22">ID:</label>
+                <input type="text" class="form-control" id="id" name="id" th:field="*{loginId}" th:errorclass="field-error"
+                       value="ddd" disabled>
+                <div class="field-error" th:errors="*{loginId}"></div>
+            </div>
+            <div class="field-row-stacked" style="width: 230px">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" th:field="*{password}" th:errorclass="field-error">
+                <div class="field-error" th:errors="*{password}"></div>
+            </div>
+            <div class="field-row-stacked" style="width: 230px">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" th:field="*{name}" th:errorclass="field-error"
+                       placeholder="neo">
+                <div class="field-error" th:errors="*{name}"></div>
+            </div>
+            <button type="submit" class="" style="width: 230px; margin-bottom: 10px; margin-top: 5px;">수정하기</button>
+            <button type="submit"  th:href="@{/posts}" class="" style="width: 230px; margin-bottom: 10px; margin-top: px;">취소</button>
+        </form>
+
+    </div>
+</div>
+
+<!--
+<div class="login-container">
+    <h2 class="text-center"></h2>
+    <form class="login-form" th:action="@{/login}" th:object="${form}" method="post">
+        <div class="form-group">
+            <label for="username">아이디:</label>
+            <input type="text" class="form-control" id="username" th:field="*{loginId}" placeholder="아이디를 입력하세요">
+        </div>
         <div class="form-group">
             <label for="password">비밀번호:</label>
-            <input type="password" class="form-control" id="password" name="password" th:field="*{password}"
-                   th:errorclass="field-error" placeholder="비밀번호를 입력하세요">
-            <div class="field-error" th:errors="*{password}"></div>
+            <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="비밀번호를 입력하세요">
         </div>
-        <div class="form-group">
-            <label for="name">이름:</label>
-            <input type="text" class="form-control" id="name" name="name" th:field="*{nickname}" th:errorclass="field-error"
-                   placeholder="이름을 입력하세요">
-            <div class="field-error" th:errors="*{nickname}"></div>
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"> 글로벌 오류 </p>
         </div>
-        <div class="form-group dog-image-upload">
-            <label for="image">Image:</label>
-            <input type="file" class="form-control-file" id="image"  th:field="*{image}" accept="image/*">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">수정하기</button>
-        <a href="#" th:href="@{/posts}" class="btn btn-secondary btn-block mt-2">취소</a>
+        <button type="submit" class="btn btn-primary btn-block">로그인</button>
+        <a href="#" th:href="@{/user/signup}" class="btn btn-secondary btn-block mt-2">회원가입</a>
     </form>
+    <div class="sns">
+        <a href="#">구글로그인</a>
+        <a href=""> 네이버로그인</a>
+
+    </div>
 </div>
+-->
+
 
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -1,5 +1,6 @@
 package com.choimung.boardService.service;
 
+import com.choimung.boardService.controller.dto.MemberUpdateDto;
 import com.choimung.boardService.domain.Member;
 import com.choimung.boardService.respository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,9 @@ public class MemberService {
         return memberRepository.findByLoginId(loginId).stream()
                 .filter(m -> m.getPassword().equals(password)).findFirst()
                 .orElse(null);
+    }
+
+    public void update(Long id, MemberUpdateDto memberUpdateDto) {
+        memberRepository.update(id, memberUpdateDto);
     }
 }

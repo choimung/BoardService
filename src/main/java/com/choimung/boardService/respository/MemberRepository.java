@@ -1,5 +1,6 @@
 package com.choimung.boardService.respository;
 
+import com.choimung.boardService.controller.dto.MemberUpdateDto;
 import com.choimung.boardService.domain.Member;
 import jakarta.persistence.EntityManager;
 import java.util.List;
@@ -27,4 +28,9 @@ public class MemberRepository {
     }
 
 
+    public void update(Long id, MemberUpdateDto memberUpdateDto) {
+        Member findMember = findOne(id);
+        findMember.setPassword(memberUpdateDto.getPassword());
+        findMember.setName(memberUpdateDto.getName());
+    }
 }
