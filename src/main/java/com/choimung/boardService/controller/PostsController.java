@@ -37,8 +37,9 @@ public class PostsController {
     }
 
     @GetMapping("/add")
-    public String postAddForm(Model model) {
+    public String postAddForm(@SessionAttribute(name = "loginMember", required = false) Member member,  Model model) {
         model.addAttribute("form", new PostAddFrom());
+        model.addAttribute("loginMember", member);
         return "posts/postsAddForm";
     }
 
@@ -68,6 +69,12 @@ public class PostsController {
         Comments comment = Comments.createComment(findMember, findPosts, content);
         commentsRepository.save(comment);
         return "redirect:/posts/{postId}";
+    }
+
+    @GetMapping("/{postId}/delete")
+    public String postDelete(@PathVariable Long postId) {
+        postsService.delete(postId);
+        return "redirect:/posts";
     }
 
 

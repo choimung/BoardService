@@ -21,6 +21,10 @@ public class PostsService {
         postsRepository.save(posts);
     }
 
+    public void delete(Long postId) {
+        postsRepository.delete(postId);
+    }
+
     public Posts findOne(Long postId) {
         return postsRepository.findOne(postId);
     }

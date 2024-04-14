@@ -17,6 +17,11 @@ public class PostsRepository {
         em.persist(posts);
     }
 
+    public void delete(Long postId) {
+        Posts posts = em.find(Posts.class, postId);
+        em.remove(posts);
+    }
+
     public Posts findOne(Long postId) {
         return em.find(Posts.class, postId);
     }
