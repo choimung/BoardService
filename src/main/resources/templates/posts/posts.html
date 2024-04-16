@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="window-body" style="color: black; margin-left:23px;">
-            <a style="text-decoration:none;" th:text="${loginMember != null ? loginMember.getName() : '비회원'}"
+            <a style="text-decoration:none; color: #00f" th:text="${loginMember != null ? loginMember.getName() : '비회원'}"
                th:href="@{/user/edit}">비회원</a> 님 반갑습니다.
         </div>
     </div>

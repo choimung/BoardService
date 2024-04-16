@@ -1,6 +1,7 @@
 package com.choimung.boardService.controller;
 
 import com.choimung.boardService.controller.dto.PostAddFrom;
+import com.choimung.boardService.controller.dto.PostUpdateDto;
 import com.choimung.boardService.domain.Comments;
 import com.choimung.boardService.domain.Member;
 import com.choimung.boardService.domain.Posts;
@@ -59,6 +60,21 @@ public class PostsController {
         model.addAttribute("post", findPost);
         model.addAttribute("loginMember", member);
         return "posts/post";
+    }
+
+    @GetMapping("/{postId}/edit")
+    public String postEditForm(@PathVariable Long postId, Model model) {
+        Posts post = postsService.findOne(postId);
+        model.addAttribute("post", post);
+        return "posts/postsEditForm";
+    }
+    
+    @PostMapping("/{postId}/edit")
+    public String postEdit(@PathVariable Long postId, @SessionAttribute(name = "loginMember",required = false) Member member,
+                           @ModelAttribute PostUpdateDto postUpdateDto) {
+        Member findMember = memberService.findOne(member.getId());
+        postsService.update(postId, findMember, postUpdateDto);
+        return "redirect:/posts/{postId}";
     }
 
     @PostMapping("/{postId}")

@@ -39,7 +39,8 @@ public class Posts {
     private String createBy;
     @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate createAt;
-    private LocalDateTime modifiedAt;
+    @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private LocalDate modifiedAt;
     private String modifiedBy;
 
     public static Posts createPost(Member member, String title, String content) {
@@ -49,6 +50,14 @@ public class Posts {
         posts.setContent(content);
         posts.setCreateAt(LocalDate.now());
         posts.setCreateBy(member.getName());
+        return posts;
+    }
+
+    public static Posts postUpdate(Posts posts, Member member, String title, String content) {
+        posts.setTitle(title);
+        posts.setContent(content);
+        posts.setModifiedAt(LocalDate.now());
+        posts.setModifiedBy(member.getName());
         return posts;
     }
 

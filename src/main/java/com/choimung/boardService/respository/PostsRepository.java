@@ -1,5 +1,7 @@
 package com.choimung.boardService.respository;
 
+import com.choimung.boardService.controller.dto.PostUpdateDto;
+import com.choimung.boardService.domain.Member;
 import com.choimung.boardService.domain.Posts;
 import jakarta.persistence.EntityManager;
 import java.util.List;
@@ -29,4 +31,5 @@ public class PostsRepository {
     public List<Posts> findAll() {
         return em.createQuery("SELECT p FROM Posts p order by p.id desc", Posts.class).getResultList();
     }
+
 }
